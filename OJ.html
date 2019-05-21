@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>导航栏</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/codemirror@5.40.0/lib/codemirror.css">
+    <link rel="stylesheet" href="https://unpkg.com/codemirror@5.40.0/theme/material.css">
+
+    <style type="text/css">
+        body{
+            background: darkgrey;
+        }
+        .contain{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            margin:0 auto;
+            margin-top:10px;
+            background: white;
+            width:800px;
+            height: auto;
+            border-radius: 5px;
+            animation:riseshow 3s cubic-bezier(0.19, 1, 0.22, 1);
+
+        }
+        .titleword{
+            font-size:80px;
+            width:720px;
+            margin-left:50px;
+            margin-right:50px;
+            margin-top:20px;
+            padding:20px;
+            border-bottom: 2px #666 solid; 
+            
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+        }
+ 
+        #ShowText{
+            animation:riseshow 3s cubic-bezier(0.19, 1, 0.22, 1);
+            height:400px;
+            display:flex;
+          justify-content: center;
+          align-items: center;
+         
+        } 
+
+        @keyframes riseshow{
+           0%{opacity: 0;transform: translate3d(0,40px,0);}
+           100%{opacity: 1;transform: translate3d(0,0,0);}
+         }
+
+        
+        
+        .nav {
+            width: inherit; 
+            height: 60px;
+ 
+        
+            padding: 5px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+          
+        }
+
+        .navitem{
+          width:200px;
+          margin:10px;
+          padding:10px;
+
+          box-shadow: 1px 2px 3px rgb(36, 36, 36);
+          display:flex;
+          justify-content: center;
+          align-items: center;
+           border-radius: 15px;
+           
+        }
+        .word{
+            color:black;
+            font-size:20px;
+            font-style:normal;
+        }
+
+        .operaArea{
+            margin:10px 10px;
+          
+            width:inherit;
+            height:auto;
+            border-radius: 15px;
+        }
+
+
+
+        .rank ul {
+            width: 2000px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .rank li {
+            list-style: none;
+            float: left;
+            margin-left: 15px;
+            width: 130px;
+        }
+
+        .question ul {
+            width: 2000px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .question li {
+            list-style: none;
+            float: left;
+            margin-left: 15px;
+            width: 130px;
+            
+        }
+       
+        .subbotten{
+           color:black;
+           border:2px black solid;
+           font-size: 13pt;
+           line-height: 85rpx;
+           height: 85rpx;
+           text-align: center;
+           border-radius: 5px;
+           margin-left:630px;
+           margin-bottom:50px;
+        }
+         
+ 
+        .subbotten:hover{
+            background:black;
+            color:white;
+        }        
+          
+        .questitle{
+            font-weight:800;
+            font-size:50px;
+            background:rgb(185, 185, 185);
+            box-shadow: 1px 2px 3px rgb(36, 36, 36);
+            border-radius:15px;
+
+            width:600px;
+            
+            margin:20px auto;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .subquetitle{
+            font-weight:700;
+            font-size:20px;
+        }
+
+        .marginCenter {
+            width:700px;
+            
+            margin:auto;
+            
+        }
+
+        .inputCode {
+            width: 500px;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .logs ul {
+            width: 600px;
+            overflow: hidden;
+            white-space: nowrap;
+
+        }
+
+        .logs li {
+            list-style: none;
+            float: left;
+            margin-left: 15px;
+            width: 200px;
+            height: 80px;
+        }
+
+
+    </style>
+
+    <script>
+        function dateChange(date) {
+            return new Date(date).toLocaleString();
+        }
+    </script>
+
+    <script src="https://unpkg.com/codemirror@5.40.0/lib/codemirror.js"></script>
+    <script src="https://unpkg.com/codemirror@5.40.0/mode/clike/clike.js"></script>
+
+    <script>
+        var uname = 'pangye';
+        var url = 'http://129.28.139.189:4040';
+
+        $(document).ready(function() {
+            $("#Rank").click(function(){
+
+                $.get(url, {username: uname, type : 'getuserrank'}, function(data, state) {
+                    if(state == 'success') {
+                        $("#ShowText").hide();
+                        $("#TextOut").empty();
+
+                        for(let i=0; i<data.args.length; ++i) {
+                            let context = "<ul class='rank'> <li class='rank'>" + data.args[i].rank + "</li><li class='rank'>" +
+                                data.args[i].name + "</li><li class='rank'>" +
+                                data.args[i].nickname + "</li><li class='rank'>" +
+                                data.args[i].score + "</li> </ul> <br>";
+                            $("#TextOut").append(context);
+                        }
+                    } else {
+                        alert('数据返回失败');
+                    }
+                })
+            });
+
+            $("#Home").click( function(){
+                $("#TextOut").empty();
+                $("#ShowText").show();
+            })
+
+            $("#Titles").click( function() {
+
+                $.get(url, {type: 'getproblemlist', username : uname}, function (data, state) {
+                    if (state == 'success') {
+                        $("#ShowText").hide();
+                        $("#TextOut").empty();
+
+
+                        for(let i=0; i<data.args.length; ++i) {
+                            new Promise( (reslove, reject)=>{
+                                let classstr = "<li class='question" + data.args[i].id.toString() + "'>";
+                                let context = "<ul class='question'> " + classstr + data.args[i].id + "</li>" +
+                                    classstr + data.args[i].name + "</li>" +
+                                    classstr + "<li class='question'>" +
+                                    data.args[i].complete + "</li></ul> <br>";
+                                let qid = data.args[i].id.toString();
+                                $("#TextOut").append(context);
+                                reslove(qid);
+
+                            }).then( (qid)=>{
+
+                                let classID = ".question" + data.args[i].id.toString();
+                                $(classID).click(function () {
+                                    $.get(url, {
+                                        username : uname,
+                                        type: 'getprobleminfo',
+                                        id: data.args[i].id.toString()
+                                    }, function (data, state) {
+                                        if (state == 'success') {
+                                            $("#ShowText").hide();
+                                            $("#TextOut").empty();
+
+                                            let Head = data.name;
+                                            let Des = data.description;
+                                            let SampleInput = data.sampleinput;
+                                            let SampleOutput = data.sampleoutput;
+                                            let precode = data.code;
+
+
+                                            $("#TextOut").append(" <p class='questitle'>" + Head + "</p>");
+                                            $("#TextOut").append("<div class='subquetitle'>题目描述</div> \n <p>" + Des + "</p>");
+
+                                            if(SampleInput.length == SampleOutput.length) {
+                                                for (let i = 0; i < SampleInput.length; ++i) {
+                                                    $("#TextOut").append("<div class='subquetitle'>样例输入</div> \n <p>" + SampleInput[i] + "</p>");
+                                                    $("#TextOut").append("<div class='subquetitle'>样例输出</div> \n <p>" + SampleOutput[i] + "</p>");
+                                                }
+                                            }
+
+                                            let submit = "<textarea class='inputCode' id='subcode'/><br><br>" +
+                                                "<input type='submit' class='subbotten' id='scode' value='submit'/>"
+
+                                            new Promise((resolve, reject) => {
+                                                $("#TextOut").append(submit);
+                                                resolve('');
+                                            }).then((ret) => {
+
+                                                new Promise((resolve, reject) => {
+
+                                                    let myTextArea = document.getElementById('subcode');
+                                                    let editor = CodeMirror.fromTextArea(myTextArea, {
+                                                        lineNumbers: true,
+                                                        mode: 'text/x-c++src',
+                                                        theme: 'material',
+                                                    });
+
+                                                    if(precode != null) {
+                                                        editor.setValue(precode);
+                                                    }
+
+                                                    resolve(editor)
+                                                }).then((editor)=>{
+
+
+                                                    $("#scode").click(()=>{
+                                                        alert('testing');
+                                                        $.get(url,
+                                                            {
+                                                                type : 'submit',
+                                                                username : uname,
+                                                                qID : qid,
+                                                                code : editor.getValue()
+                                                            }, function(data, state) {
+                                                                if(state == 'success') {
+                                                                    if(data.status == 'DONE') {
+                                                                        alert('Accepeted!');
+                                                                    } else {
+                                                                        alert('Rejected!');
+                                                                    }
+                                                                } else {
+                                                                    alert('数据返回失败');
+                                                                }
+                                                            })
+                                                    })
+                                                })
+                                            })
+
+
+                                        } else {
+                                            alert("数据返回失败");
+                                        }
+                                    })
+                                })
+                            })
+                        }
+                    } else {
+                        alert('数据返回失败');
+                    }
+                })
+            })
+
+            $("#Logs").click(function() {
+                $.get(url,
+                    {
+                        type : 'getusrlogs',
+                        username : uname,
+                    }, function(data, state) {
+                        if(state == 'success') {
+                            $("#ShowText").hide();
+                            $("#TextOut").empty();
+
+                            for(let i=0; i<data.args.length; ++i) {
+                                new Promise((resolve, reject) => {
+
+                                    let classstr = "<li class='logs" + i.toString() + "'>";
+                                    let status = null;
+
+                                    if(data.args[i].status == 'DONE') {
+                                        status = 'Accepted';
+                                    } else {
+                                        status = 'Rejected';
+                                    }
+
+                                    let context = "<ul class='logs'> " + classstr + data.args[i].qID + "</li>" +
+                                        classstr + status+ "</li>" +
+                                        classstr + dateChange(data.args[i].date) + "</li> <br> <br>  ";
+
+                                    $("#TextOut").append(context);
+                                    resolve({id : i.toString(), qid : data.args[i].qID, code : data.args[i].code});
+                                }).then((ret)=>{
+                                    $(".logs" + ret.id).click(function() {
+                                        $("#ShowText").hide();
+                                        $("#TextOut").empty();
+                                        $("#TextOut").append("QuestionID : <p>" + ret.qid + "</p>")
+
+                                        new Promise((resolve, reject) => {
+
+                                            $("#TextOut").append("<textarea id='text'> </textarea>");
+                                            resolve('');
+
+                                        }).then((rep) => {
+                                            let myTextArea = document.getElementById('text');
+
+                                            let editor = CodeMirror.fromTextArea(myTextArea, {
+                                                lineNumbers: true,
+                                                mode: 'text/x-c++src',
+                                                theme: 'material'
+                                            });
+
+                                            editor.setValue(ret.code);
+                                        })
+
+                                    });
+                                })
+                            }
+                        } else {
+                            alert('数据返回失败');
+                        }
+                    })
+            })
+        });
+    </script>
+</head>
+
+
+<body>
+<div class="contain">
+<div class="titleword">SWOJ</div>
+<div class="nav">
+   
+         
+        <div class="navitem"><a class="word" href="#home" id="Home"> 主页 </a></div>
+        <div class="navitem"><a class="word" href="#news" id="Titles"> 题目 </a></div>
+        <div class="navitem"> <a class="word" href="#contact" id="Logs"> 提交记录 </a></div>
+        <div class="navitem"> <a class="word" href="#about" id="Rank"> 排名 </a></div>
+  
+</div>
+
+
+<div class="operaArea">
+<p id="ShowText"> Welcome to SWOJ </p>
+<div id="TextOut" class='marginCenter'> </div>
+</div>
+
+</div>
+
+</body>
+</html>

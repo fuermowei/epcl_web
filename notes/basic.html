@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>epcl</title>
+        <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <h1>hello world</h1>
+        <div id = 'app1'>{{message}}</div>
+        <div id = 'app2'>
+            <span v-bind:title="message">鼠标置于此处查看当前时间</span>
+        </div>
+        <div id = 'app3'>
+            <ul>
+                <li v-for='list in lists'>
+                    {{list.text}}
+                </li>
+            </ol>
+        </div>
+
+        <div id = 'app4'>
+            <button v-on:click="echoHello">你好啊</button>
+        </div>
+
+        <div id = 'app5'>
+            <span>{{myinput}}</span>
+        <br>
+            <input v-model="myinput">
+        </div>
+
+        <div id='insertimg'>
+            <button v-on:click="insert">+1s</button>
+        </div>
+        <div id = 'app6'>
+            <ol>
+                <test-item 
+                    v-for='item in imgList'
+                    v-bind:myimg='item'
+                    v-bind:key='item.id'
+                ></test-item>
+            </ol>
+        </div>
+        <script src='main.js'></script>
+    </body>
+</html>

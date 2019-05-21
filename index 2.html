@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"> </script>
+
+    <script>
+        function doIframeLoad(pkt, url, cid) {
+            let context = "<iframe src='" + url + "'  marginWidth='0' marginHeight='0' frameBorder ='0'" +
+                "  allowTransparency='true' class='pageShow' id='" + cid + "' />";
+            pkt.append(context);
+        }
+
+        function doBlockLoad(pkt, cid, str) {
+            let context = "<div class='block' id='" + cid + "'>" +
+                "<div class='bar' id='" + cid + "bar'> <p class='Barstr'>" + str + "</p> </div>";
+            pkt.append(context);
+        }
+
+        function doInfoLoad(pkt, cid) {
+            let context = "<div class='info' id='" + cid + "'/>";
+            pkt.append(context);
+        }
+
+        function doInfoStrLoad(pkt, cid, str) {
+            let context = "<div class='infostr' id='" + cid + "'>" +
+                str + "</div>";
+            pkt.append(context);
+        }
+
+        function doGetInfo(pkt, url, msg) {
+            /*
+                msg :
+                { type : "link", username : "yonghuming", key : "???"}
+                data : {retmsg :"ok","bad","err", arg:[username, time, doSomething] }
+
+
+                msg :
+                { type : getcourselist, username : "yonghuming", key : "???"}
+                args : [{
+                    classname : "string"
+                    teacher : ""
+                    misnumber : ""
+                    classid : ""
+                }]
+
+             */
+            $.get(url, msg, function() {
+                if(msg.type == "link") {
+                    let showtext = msg.username + " do " + msg.dosomething + " on " + msg.time;
+
+                } else if(msg.type == "getcourseinfo") {
+
+                } else if(msg.type == 'getnews') {
+
+                } else if(msg.type == 'gettasklist') {
+
+                }
+            });
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $("#operWindow").empty();
+
+            $(".mainpage").click(function() {
+                $("#operWindow").empty();
+
+                doBlockLoad($("#operWindow"), 'RunState', "动态");
+                doBlockLoad($("#operWindow"), 'Taskinfo', "任务");
+                doBlockLoad($("#operWindow"), 'Classinfo', "课程");
+                doBlockLoad($("#operWindow"), 'Newsinfo', "新闻");
+
+                //------------美丽的分割线--------
+                doInfoLoad($("#RunState"), 'newTourist');
+                doInfoStrLoad($("#newTourist"), 'Tourist1', "Tourist");
+                doInfoStrLoad($("#newTourist"), 'Tourist2', "AC题目超过100道");
+                doInfoStrLoad($("#newTourist"), 'Tourist3', "2019-01-04");
+
+                doInfoLoad($("#RunState"), 'newXiaoXianYu');
+                doInfoStrLoad($("#newXiaoXianYu"), 'XiaoXianYu1', "XiaoXianYu");
+                doInfoStrLoad($("#newXiaoXianYu"), 'XiaoXianYu2', "做完了所有作业");
+                doInfoStrLoad($("#newXiaoXianYu"), 'XiaoXianYu3', "2019-01-05");
+
+                doInfoLoad($("#RunState"), 'newPangye');
+                doInfoStrLoad($("#newPangye"), 'Pangye1', "Pangye");
+                doInfoStrLoad($("#newPangye"), 'Pangye2', "登录了shell端");
+                doInfoStrLoad($("#newPangye"), 'Pangye3', "2019-01-05");
+
+                //------------美丽的分割线--------
+                doInfoLoad($("#Taskinfo"), 'newCaoZuo');
+                doInfoStrLoad($("#newCaoZuo"), 'newCaoZuo1', "操作系统");
+                doInfoStrLoad($("#newCaoZuo"), 'newCaoZuo2', "发布线程作业");
+                doInfoStrLoad($("#newCaoZuo"), 'newCaoZuo3', "2019-01-06");
+
+                doInfoLoad($("#Taskinfo"), 'newYouxi');
+                doInfoStrLoad($("#newYouxi"), 'newYouxi1', "游戏设计");
+                doInfoStrLoad($("#newYouxi"), 'newYouxi2', "发布课程作业");
+                doInfoStrLoad($("#newYouxi"), 'newYouxi3', "2019-01-06");
+
+                doInfoLoad($("#Taskinfo"), 'newWangLuo');
+                doInfoStrLoad($("#newWangLuo"), 'newWangLuo1', "计算机网络");
+                doInfoStrLoad($("#newWangLuo"), 'newWangLuo2', "发布WireShark作业");
+                doInfoStrLoad($("#newWangLuo"), 'newWangLuo3', "2019-01-06");
+
+                //------------美丽的分割线--------
+                doInfoLoad($("#Classinfo"), 'CaoZuo');
+                doInfoStrLoad($("#CaoZuo"), 'CaoZuo1', "操作系统");
+                doInfoStrLoad($("#CaoZuo"), 'CaoZuo2', "有新的消息");
+                doInfoStrLoad($("#CaoZuo"), 'CaoZuo3', "未读消息 : 4");
+
+                doInfoLoad($("#Classinfo"), 'Youxi');
+                doInfoStrLoad($("#Youxi"), 'Youxi1', "游戏设计");
+                doInfoStrLoad($("#Youxi"), 'Youxi2', "有新的消息");
+                doInfoStrLoad($("#Youxi"), 'Youxi3', "未读消息 : 2");
+
+                doInfoLoad($("#Classinfo"), 'WangLuo');
+                doInfoStrLoad($("#WangLuo"), 'newWangLuo1', "计算机网络");
+                doInfoStrLoad($("#WangLuo"), 'newWangLuo2', "有新的消息");
+                doInfoStrLoad($("#WangLuo"), 'newWangLuo3', "未读消息 : 1");
+
+                //------------美丽的分割线--------
+                doInfoLoad($("#Newsinfo"), 'newbaidu');
+                doInfoStrLoad($("#newbaidu"), 'baidustr1', "百度");
+                doInfoStrLoad($("#newbaidu"), 'baidustr2', "人工智能");
+                doInfoStrLoad($("#newbaidu"), 'baidustr3', "2019-01-01");
+
+                doInfoLoad($("#Newsinfo"), 'newCSDN');
+                doInfoStrLoad($("#newCSDN"), 'CSDN1', "CSDN");
+                doInfoStrLoad($("#newCSDN"), 'CSDN2', "大数据可视化");
+                doInfoStrLoad($("#newCSDN"), 'CSDN3', "2019-01-02");
+
+                doInfoLoad($("#Newsinfo"), 'newGoogle');
+                doInfoStrLoad($("#newGoogle"), 'Google1', "Google");
+                doInfoStrLoad($("#newGoogle"), 'Google2', "智能车");
+                doInfoStrLoad($("#newGoogle"), 'Google3', "2019-01-03");
+            });
+
+            $(".OJpage").click(function() {
+                $("#operWindow").empty();
+                doIframeLoad($("#operWindow"), './OJ.html', 'OJPageShow');
+            });
+
+            $(".Shellpage").click(function() {
+                $("#operWindow").empty();
+                doIframeLoad($("#operWindow"), 'http://129.28.139.189:5010', 'ShellPageShow');
+            });
+
+
+        });
+    </script>
+</head>
+
+<body>
+    <div class="contain">
+     <div class="divmodelleft">
+
+        <div class="userinfo">
+            <img class=circular--squareP src="./873_B.jpg">
+           <div class="kuang">
+            <div class="word1">姓名：奥巴马里奥</div>
+            <div class="word1">年级:大三</div>
+        </div>
+        </div>
+        
+       
+        <div id="nav" class='mainpage'>
+            主页
+        </div>
+    
+        <div id="nav" class='OJpage'>
+            OJ
+        </div>
+
+        <div id="nav" class='Shellpage'>
+            Shell
+        </div>
+
+     </div>
+
+     <div class="divmodelright" id="operWindow">
+        <!-- <iframe src="http://129.28.139.189:5010" marginWidth="0" marginHeight="0" frameBorder ="0"
+                allowTransparency="true" class="pageShow" id="ShellPageShow"/> -->
+
+        <!-- <iframe src="./OJ.html" marginWidth="0" marginHeight="0" frameBorder ="0"
+                allowTransparency="true" class="pageShow" id="OJPageShow"/> -->
+
+        <!-- >div class="runstate">
+        </div> -->
+
+     </div>
+    </div>
+</body>
+</html>
