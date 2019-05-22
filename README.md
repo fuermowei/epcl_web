@@ -1,6 +1,6 @@
 # epcl_web
 WEB For EPCL
-![image](git@github.com:fuermowei/epcl_web.git/images/index.png)
+![image](https://github.com/fuermowei/epcl_web.git/images/index.png)
 ~~~~~~~~~We have made a multi-module teaching management system.~~~~~~~~~
 
 #####################   	 What we do     #########################
