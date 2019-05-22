@@ -1,6 +1,6 @@
 # epcl_web
 WEB For EPCL
-![image](http://github.com/itmyhome2013/readme_add_pic/raw/master/images/nongshalie.jpg)
+![image](git@github.com:fuermowei/epcl_web.git/images/index.png)
 ~~~~~~~~~We have made a multi-module teaching management system.~~~~~~~~~
 
 #####################   	 What we do     #########################
