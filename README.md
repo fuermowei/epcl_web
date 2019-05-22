@@ -1,10 +1,8 @@
 # epcl_web
 WEB For EPCL
 ![image](https://github.com/fuermowei/epcl_web/blob/master/images/index.png)
-~~~~~~~~~We have made a multi-module teaching management system.~~~~~~~~~
 
 #####################   	 What we do     #########################
-
 *First, after we interact with the background, we will display the relevant dynamics of the classmates in the homepage module, all of our tasks, courses, and information that the system periodically pushes.
 ![image](https://github.com/fuermowei/epcl_web/blob/master/images/mainpage.png)
 
