@@ -1,5 +1,6 @@
 # epcl_web
 WEB For EPCL
+![image](http://github.com/itmyhome2013/readme_add_pic/raw/master/images/nongshalie.jpg)
 ~~~~~~~~~We have made a multi-module teaching management system.~~~~~~~~~
 
 #####################   	 What we do     #########################
