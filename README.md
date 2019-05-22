@@ -7,14 +7,30 @@ WEB For EPCL
 ![image](https://github.com/fuermowei/epcl_web/blob/master/images/mainpage.png)
 
 *After that, you can click on OJ, this is a simple OJ model, developed entirely by ourselves.
-![image](https://github.com/fuermowei/epcl_web/blob/master/images/OJmain.png)
 -We will add the user's recent training mode to the homepage in a later version.
+![image](https://github.com/fuermowei/epcl_web/blob/master/images/OJmain.png)
 
 -There is a problem information in the background in the list of topics, but it is still very few, but it will continue to increase in the later stage.
+![image](https://github.com/fuermowei/epcl_web/blob/master/images/OJproblemlist.png)
+
 -There will be recent code and implementation submitted by the user in the submission record.
+![image](https://github.com/fuermowei/epcl_web/blob/master/images/OJproblem.png)
+
 -In the ranking you will see the submissions and specific rankings of users registered with the system.
+![image](https://github.com/fuermowei/epcl_web/blob/master/images/OJlogs.png)
+
+-In the log, you can view the code submitted in the past, whether passed or wrong.
+![image](https://github.com/fuermowei/epcl_web/blob/master/images/OJloginfo.png)
+
+-Ranking system as mentioned above
+![image](https://github.com/fuermowei/epcl_web/blob/master/images/OJRank.png)
 
 *Then there is the Shell interface. In the Shell interface, enter the username, address and port number to link to the remote server.On a specific remote server, you can use our experimental teaching management platform
+![image](https://github.com/fuermowei/epcl_web/blob/master/images/Shellpage.png)
+
+-After logging in, you can remotely connect to ssh's web page.
+![image](https://github.com/fuermowei/epcl_web/blob/master/images/Shellpageinfo.png)
+
 
 #####################   Interface and implementation statement    #############
 *In order to hide our experimental server, we only show one model on the homepage.
