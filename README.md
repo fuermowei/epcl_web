@@ -6,6 +6,7 @@ WEB For EPCL
 #####################   	 What we do     #########################
 
 *First, after we interact with the background, we will display the relevant dynamics of the classmates in the homepage module, all of our tasks, courses, and information that the system periodically pushes.
+![image](https://github.com/fuermowei/epcl_web/blob/master/images/mainpage.png)
 
 *After that, you can click on OJ, this is a simple OJ model, developed entirely by ourselves.
 -We will add the user's recent training mode to the homepage in a later version.
