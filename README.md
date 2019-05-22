@@ -7,7 +7,9 @@ WEB For EPCL
 ![image](https://github.com/fuermowei/epcl_web/blob/master/images/mainpage.png)
 
 *After that, you can click on OJ, this is a simple OJ model, developed entirely by ourselves.
+![image](https://github.com/fuermowei/epcl_web/blob/master/images/OJmain.png)
 -We will add the user's recent training mode to the homepage in a later version.
+
 -There is a problem information in the background in the list of topics, but it is still very few, but it will continue to increase in the later stage.
 -There will be recent code and implementation submitted by the user in the submission record.
 -In the ranking you will see the submissions and specific rankings of users registered with the system.
